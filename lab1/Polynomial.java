@@ -26,10 +26,16 @@ public class Polynomial{
      * @param power The power of the element
      */
     public Polynomial(double coefficient, int power){
-        this(1);
+        this(power + 1);
 
-        this.coefficients[0] = coefficient;
-        this.powers[0] = power;
+        for ( int i = 0; i < power; i++)
+        {
+            this.coefficients[i] = 0;
+            this.powers[i] = 1;
+        }
+
+        this.coefficients[power] = coefficient;
+        this.powers[power] = power;
     }
     
     /**
@@ -54,6 +60,31 @@ public class Polynomial{
             this.coefficients[i] = coefficients[i];
             this.powers[i] = i; 
         } 
+    }
+
+    /**
+     * This method takes the degree and returns the coefficient of the term with that degree.
+     * @param degree an integer
+     * @return the coefficient of the term with that degree
+     */
+    public double getCoefficient(int degree)
+    {
+        int indexOfDegree = 0;
+        double coefficient;
+        boolean isFound = false;
+
+        for ( int i = 0; i < this.powers.length && !isFound; i++ )
+        {
+            if ( this.powers[i] == degree )
+            {
+                indexOfDegree = i;
+                isFound = true;
+            } 
+        }
+
+        coefficient = powers[indexOfDegree];
+
+        return coefficient;
     }
 
     /**
@@ -163,17 +194,21 @@ public class Polynomial{
      * @param x a double for evaluation
      * @return the result as double
      */
-    public double elval2(double x){
+    public double eval2(double x){
         double result = 0;
 
+
         //Visits all the coefficients one by one from the biggest power.
-        for ( int i = this.coefficients.length; i > 0; i--)
+        for ( int i = this.coefficients.length - 1; i >= 0; i--)
         {
-            result = result + ((coefficients[i] * x) + coefficients[i - 1]);
+            result = (result * x) + coefficients[i];
         }
 
-        result = result + coefficients[0];
-
+        //There might be some problems from time to time. Ask to TA.
+        result = result * Math.pow(10, 10);
+        result = Math.floor(result);
+        result = result / Math.pow(10, 10);
+        
         return result;
     }
 }
@@ -198,10 +233,10 @@ class PolynomialTester{
         double evaluation_1_3 = pol3.eval(7.4);
         double evaluation_1_4 = pol4.eval(10);
 
-        double evaluation_2_1 = pol1.eval(5);
-        double evaluation_2_2 = pol2.eval(-3);
-        double evaluation_2_3 = pol3.eval(7.4);
-        double evaluation_2_4 = pol4.eval(10);
+        double evaluation_2_1 = pol1.eval2(5);
+        double evaluation_2_2 = pol2.eval2(-3);
+        double evaluation_2_3 = pol3.eval2(7.4);
+        double evaluation_2_4 = pol4.eval2(10);
         
         System.out.println("The given polynomial is: " + pol1 + " \nWith the degree of " + deg1 + "\n");
         System.out.println("The given polynomial is: " + pol2 + " \nWith the degree of " + deg2 + "\n");
