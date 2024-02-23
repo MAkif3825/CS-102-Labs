@@ -25,13 +25,13 @@ public class Polynomial{
      * @param coefficient The coefficient of the element
      * @param power The power of the element
      */
-    public Polynomial(double coefficient, int power){
+    public Polynomial(int power, double coefficient){
         this(power + 1);
 
         for ( int i = 0; i < power; i++)
         {
             this.coefficients[i] = 0;
-            this.powers[i] = 1;
+            this.powers[i] = i;
         }
 
         this.coefficients[power] = coefficient;
@@ -70,7 +70,7 @@ public class Polynomial{
     public double getCoefficient(int degree)
     {
         int indexOfDegree = 0;
-        double coefficient;
+        double coefficient = 0;
         boolean isFound = false;
 
         for ( int i = 0; i < this.powers.length && !isFound; i++ )
@@ -81,8 +81,10 @@ public class Polynomial{
                 isFound = true;
             } 
         }
-
-        coefficient = powers[indexOfDegree];
+        if ( isFound )
+        {
+            coefficient = coefficients[indexOfDegree];
+        }
 
         return coefficient;
     }
@@ -114,6 +116,7 @@ public class Polynomial{
         String result = "";
         String element = "";
         boolean isPseudoZero = true;
+        boolean isStarted = false;
 
         //Handles the zero polynomial
         if ( this.coefficients.length == 1 && this.coefficients[0] == 0)
@@ -140,7 +143,7 @@ public class Polynomial{
                     }
                     else{
                         //Handles the first element
-                        if ( i != 0)
+                        if ( i != 0 && isStarted)
                         {
                             element = element + " + ";
                         }
@@ -156,6 +159,10 @@ public class Polynomial{
 
                     result = result + element;
 
+                    if (!element.equals(""))
+                    {
+                        isStarted = true;
+                    }
                     element = "";
                 }
             }
@@ -210,53 +217,5 @@ public class Polynomial{
         result = result / Math.pow(10, 10);
         
         return result;
-    }
-}
-
-class PolynomialTester{
-    public static void main(String[] args){
-        double[] array1 = {-12.3, 5, 25.4, 0};
-        double[] array2 = {3, -5, 2};
-
-        Polynomial pol1 = new Polynomial();
-        Polynomial pol2 = new Polynomial(5, 3);
-        Polynomial pol3 = new Polynomial(array1);
-        Polynomial pol4 = new Polynomial(array2);
-
-        int deg1 = pol1.getDegree();
-        int deg2 = pol2.getDegree();
-        int deg3 = pol3.getDegree();
-        int deg4 = pol4.getDegree();
-
-        double evaluation_1_1 = pol1.eval(5);
-        double evaluation_1_2 = pol2.eval(-3);
-        double evaluation_1_3 = pol3.eval(7.4);
-        double evaluation_1_4 = pol4.eval(10);
-
-        double evaluation_2_1 = pol1.eval2(5);
-        double evaluation_2_2 = pol2.eval2(-3);
-        double evaluation_2_3 = pol3.eval2(7.4);
-        double evaluation_2_4 = pol4.eval2(10);
-        
-        System.out.println("The given polynomial is: " + pol1 + " \nWith the degree of " + deg1 + "\n");
-        System.out.println("The given polynomial is: " + pol2 + " \nWith the degree of " + deg2 + "\n");
-        System.out.println("The given polynomial is: " + pol3 + " \nWith the degree of " + deg3 + "\n");
-        System.out.println("The given polynomial is: " + pol4 + " \nWith the degree of " + deg4 + "\n\n");
-
-        System.out.println("The result of evaluation 1: " + evaluation_1_1 + "\n" + 
-                           "The result of evaluation 2: " + evaluation_2_1 + "\n" +
-                           "Are they same: " + (evaluation_1_1 == evaluation_2_1) + "\n\n");
-
-        System.out.println("The result of evaluation 1: " + evaluation_1_2 + "\n" + 
-                           "The result of evaluation 2: " + evaluation_2_2 + "\n" +
-                           "Are they same: " + (evaluation_1_2 == evaluation_2_2) + "\n\n");
-
-        System.out.println("The result of evaluation 1: " + evaluation_1_3 + "\n" + 
-                           "The result of evaluation 2: " + evaluation_2_3 + "\n" +
-                           "Are they same: " + (evaluation_1_3 == evaluation_2_3) + "\n\n");
-
-        System.out.println("The result of evaluation 1: " + evaluation_1_4 + "\n" + 
-                           "The result of evaluation 2: " + evaluation_2_4 + "\n" +
-                           "Are they same: " + (evaluation_1_4 == evaluation_2_4) + "\n\n");
     }
 }
