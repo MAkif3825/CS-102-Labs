@@ -273,7 +273,7 @@ public class Polynomial{
     }
 
     public Polynomial mul(Polynomial p2){
-        Polynomial result = new Polynomial();
+        Polynomial result = p2;
 
         return result;
     }
