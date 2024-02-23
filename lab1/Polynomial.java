@@ -218,4 +218,81 @@ public class Polynomial{
         
         return result;
     }
+
+    public Polynomial add(Polynomial p2){
+        Polynomial result;
+        Polynomial bigger;
+        Polynomial smaller;
+        double[] resultCoefficients;
+
+        if ( this.getDegree() <= p2.getDegree() )
+        {
+            bigger = this;
+            smaller = p2;
+        }
+        else
+        {
+            bigger = p2;
+            smaller = this;
+        }
+
+        resultCoefficients = new double[bigger.getDegree()];
+
+        int i = 0;
+        while ( i < smaller.getDegree() )
+        {
+            resultCoefficients[i] = smaller.getCoefficient(i) + bigger.getCoefficient(i);
+            i++;
+        }
+        while ( i < bigger.getDegree() )
+        {
+            resultCoefficients[i] = bigger.getCoefficient(i);
+        }
+
+        result = new Polynomial(resultCoefficients);
+        
+
+        return result;
+    }
+
+    public Polynomial sub(Polynomial p2){
+        Polynomial result;
+        Polynomial minusPol;
+        double[] minusPolCo = new double[p2.getDegree()] ;
+
+        for ( int i = 0; i < minusPolCo.length; i++)
+        {
+            minusPolCo[i] = p2.getCoefficient(i) * -1;
+        }
+
+        minusPol = new Polynomial(minusPolCo);
+
+        result = this.add(minusPol);
+
+        return result;
+    }
+
+    public Polynomial mul(Polynomial p2){
+        Polynomial result = new Polynomial();
+
+        return result;
+    }
+
+    public Polynomial compose(Polynomial p2){
+        Polynomial result = new Polynomial();
+
+        return result;
+    }
+
+    public Polynomial div(Polynomial p2){
+        Polynomial result = new Polynomial();
+
+        return result;
+    }
+
+    public Polynomial findEqual(Polynomial p2){
+        Polynomial result = new Polynomial();
+
+        return result;
+    }
 }
