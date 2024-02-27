@@ -1,5 +1,7 @@
 package lab1_2;
 
+import java.util.Arrays;
+
 public class PolynomialTester {
     public static void main(String[] args){
         //Initialize coefficients for polynomials
@@ -8,6 +10,8 @@ public class PolynomialTester {
         double[] array3 = {3, 4, 1};
         double[] array4 = {2, 1};
         double[] array5 = {3, 4, 1, 3, 0, 2};
+        double[] array6 = {0, 1, 0, 0, 1};
+        double[] array7 = {16, 1};
 
         //Initialize polynomials
         Polynomial pol1 = new Polynomial();
@@ -17,6 +21,8 @@ public class PolynomialTester {
         Polynomial pol5 = new Polynomial(array3);
         Polynomial pol6 = new Polynomial(array4);
         Polynomial pol7 = new Polynomial(array5);
+        Polynomial pol8 = new Polynomial(array6);
+        Polynomial pol9 = new Polynomial(array7);
 
         //Looks degrees
         int deg1 = pol1.getDegree();
@@ -102,5 +108,9 @@ public class PolynomialTester {
         System.out.println("P(Q(x)) = " + pol5.compose(pol6));
         
         System.out.println("P(x) / Q(x) = " + pol7.div(pol6));
+
+
+        int[] result = pol8.findEqual(pol9);
+        System.out.println("Solve for P(X)=Q(x): " + Arrays.toString(result));
     }
 }

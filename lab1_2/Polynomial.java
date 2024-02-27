@@ -208,12 +208,19 @@ public class Polynomial {
         return result;
     }
 
+    /**
+     * Sums current polynomial (polynomial for which the method is called)
+     * and polynomial p2, and returns the result as a new polynomial.
+     * @param p2 Polynomial
+     * @return result, Polynomial
+     */
     public Polynomial add(Polynomial p2) {
         Polynomial result;
         Polynomial bigger;
         Polynomial smaller;
         double[] resultCoefficients;
 
+        //Find the polynomial with the biggest degree
         if (this.getDegree() <= p2.getDegree()) {
             bigger = p2;
             smaller = this;
@@ -225,6 +232,7 @@ public class Polynomial {
         resultCoefficients = new double[bigger.getDegree() + 1];
 
         int i = 0;
+        //Sum the each elements until small one finished. Assing the bigger one for remaining.
         while (i <= smaller.getDegree()) {
             resultCoefficients[i] = smaller.getCoefficient(i) + bigger.getCoefficient(i);
             i++;
@@ -288,6 +296,7 @@ public class Polynomial {
 
         return result;
     }
+    //CS102_Sec2_Asgn2_Yavuz_MehmetAkif
 
     public Polynomial div(Polynomial p2) {
         Polynomial result = new Polynomial(this.getDegree() - p2.getDegree(), 0);
