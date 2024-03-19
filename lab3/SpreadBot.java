@@ -1,14 +1,14 @@
 package lab3;
 
-public class SimpleBot extends Robot{
-    
-    public SimpleBot(boolean isAttackingToRed){
+public class SpreadBot extends Robot{
+    public SpreadBot(boolean isAttackingToRed){
         this.isAttackingToRed = isAttackingToRed;
         initializeValues();
-        this.code = "S" + super.getRoboNum();
+        this.code = "K" + super.getRoboNum();
     }
 
     public void attack(Simulation s){
+        //TODO
         boolean isDestroyed;
         Robot target = s.getRandomTarget(isAttackingToRed);
         double damage = super.getAttack();
@@ -23,8 +23,8 @@ public class SimpleBot extends Robot{
 
     public void initializeValues(){
         double health = Math.random() * 1 + 2;
-        double attack = Math.random() * 1 + 1;
-        double speed = Math.random() * 1 + 1;
+        double attack = Math.random() * 1 / 2 + 0.5;
+        double speed = Math.random() * 1 / 2 + 1;
 
         super.setValues(health, attack, speed);
     };

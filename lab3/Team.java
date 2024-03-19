@@ -8,6 +8,7 @@ public class Team {
     private ArrayList<Robot> robots;
     private int size;
 
+
     public Team(int size, boolean isAttackingToRed){
         this.robots = new ArrayList<Robot>();
         this.size = size;
@@ -23,7 +24,7 @@ public class Team {
         int num;
         for ( int i = 0; i < size; i++)
         {
-            num = 0;//rand.nextInt(7);
+            num = rand.nextInt(7);
 
             if ( num == 0)
             {
@@ -31,15 +32,30 @@ public class Team {
                 this.robots.add(robot);
             }
             else if ( num == 1)
-            {}
+            {
+                robot = new PredatorBot(isAttackingToRed);
+                this.robots.add(robot);
+            }
             else if ( num == 2)
-            {}
+            {
+                robot = new DefenceBot(isAttackingToRed);
+                this.robots.add(robot);
+            }
             else if ( num == 3)
-            {}
+            {
+                robot = new SpeedBot(isAttackingToRed);
+                this.robots.add(robot);
+            }
             else if ( num == 4)
-            {}
+            {
+                robot = new SpreadBot(isAttackingToRed);
+                this.robots.add(robot);
+            }
             else
-            {}
+            {
+                robot = new OneBot(isAttackingToRed);
+                this.robots.add(robot);
+            }
 
         }
     }
@@ -122,9 +138,48 @@ public class Team {
         return targets;
     }
 
-    /*
+    public double getSpeedSum(){
+        double speedSum = 0;
+        for (Robot robot : robots) {
+            speedSum = speedSum + robot.getSpeed();
+        }
+
+        return speedSum;
+    }
+
     public int getTeamSize(){
         return this.size;
     }
-    */
+
+    public int destroyRobotAndGiveIndex(Robot r)
+    {
+        int index = 0;
+        boolean isIndexFound = false;
+
+        for ( int i = 0; i < this.size && !isIndexFound; i++)
+        {
+            if ( r == this.robots.get(i) )
+            {
+                index = i;
+                isIndexFound = true;
+            }
+        }
+
+        System.out.println(r.code + " destroyed.");
+        this.robots.remove(index);
+        this.size = this.size - 1;
+        return index;
+    }
+
+    public String toString(){
+        String result = "";
+        for (Robot robot : robots) {
+            result = result + robot;
+        }
+        return result;
+    }
+
+    public void playWith(int index, Simulation s){
+        this.robots.get(index).attack(s);
+    }
 }
