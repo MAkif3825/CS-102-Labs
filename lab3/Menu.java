@@ -30,5 +30,7 @@ public class Menu {
             }
             game.finishGame();
         }
+
+        in.close();
     }
 }
