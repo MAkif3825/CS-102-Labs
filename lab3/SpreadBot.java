@@ -8,17 +8,26 @@ public class SpreadBot extends Robot{
     }
 
     public void attack(Simulation s){
-        //TODO
         boolean isDestroyed;
-        Robot target = s.getRandomTarget(isAttackingToRed);
+        Robot[] targets = s.getLowestSpeed3(isAttackingToRed);
         double damage = super.getAttack();
-        System.out.println(this.code + " attacks " + target.code);
-        isDestroyed = target.getHitAndIsDesstroyed(damage);
 
-        if ( isDestroyed )
+        System.out.println(this.code + " attacks following targets:\n");
+        for ( Robot target : targets )
         {
-            s.removeRobot(target);
+            System.out.print(target.code + " ");
         }
+        System.out.println(" ");
+        for ( Robot target : targets )
+        {
+            isDestroyed = target.getHitAndIsDesstroyed(damage);
+
+            if ( isDestroyed )
+            {
+                s.removeRobot(target);
+            }
+        }
+
     }
 
     public void initializeValues(){

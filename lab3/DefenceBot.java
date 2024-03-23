@@ -8,9 +8,8 @@ public class DefenceBot extends Robot {
     }
 
     public void attack(Simulation s){
-        //TODO
         boolean isDestroyed;
-        Robot target = s.getRandomTarget(isAttackingToRed);
+        Robot target = s.getLowestSpeed(isAttackingToRed);
         double damage = super.getAttack();
         System.out.println(this.code + " attacks " + target.code);
         isDestroyed = target.getHitAndIsDesstroyed(damage);

@@ -1,12 +1,14 @@
 package lab3;
 
 import java.util.Scanner;
-
+/**
+ * This class is a menu for playing the game.
+ */
 public class Menu {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int size;
-
+        
         System.out.print("Team Size: ");
         while ( !in.hasNextInt() )
         {

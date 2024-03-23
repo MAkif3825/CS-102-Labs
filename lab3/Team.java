@@ -1,6 +1,7 @@
 package lab3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -130,10 +131,23 @@ public class Team {
     public Robot[] getLowestSpeed3()
     {
         Robot[] targets = new Robot[3];
-        for ( int i = 0; i < 3; i++)
+        if ( this.size >= 3 )
         {
-            targets[i] = this.robots.get((this.size - 1) - i);
+            for ( int i = 0; i < 3; i++)
+            {
+                targets[i] = this.robots.get((this.size - 1) - i);
+            }
+        } 
+        else
+        {
+            int i = 0;
+            for ( ; i < this.size; i++)
+            {
+                targets[i] = this.robots.get(i);
+            }
+            targets = Arrays.copyOf(targets, i);
         }
+
 
         return targets;
     }

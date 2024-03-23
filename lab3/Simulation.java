@@ -190,21 +190,23 @@ public class Simulation {
     public void playRound(){
         //System.out.println(indexOfFirst);
         //System.out.println(indexOfSecond);
-
-        if ( indexOfFirst >= firsTeam.getTeamSize() - 1)
+        
+        if ( indexOfFirst >= firsTeam.getTeamSize() - 1 || indexOfFirst < 0)
         {
             indexOfFirst = 0;
         }
+        System.out.println(secondTeam);
         firsTeam.playWith(indexOfFirst, this);
         indexOfFirst++;
 
 
         if ( isGameContinue() )
         {
-            if ( indexOfSecond >= secondTeam.getTeamSize() - 1)
+            if ( indexOfSecond >= secondTeam.getTeamSize() - 1 || indexOfSecond < 0)
             {
                 indexOfSecond = 0;
             }
+            System.out.println(firsTeam);
             secondTeam.playWith(indexOfSecond, this);
             indexOfSecond++;
         }

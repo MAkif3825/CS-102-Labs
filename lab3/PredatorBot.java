@@ -1,7 +1,7 @@
 package lab3;
 
 public class PredatorBot extends Robot{
-
+    
     public PredatorBot(boolean isAttackingToRed){
         this.isAttackingToRed = isAttackingToRed;
         initializeValues();
@@ -9,9 +9,8 @@ public class PredatorBot extends Robot{
     }
 
     public void attack(Simulation s){
-        //TODO
         boolean isDestroyed;
-        Robot target = s.getRandomTarget(isAttackingToRed);
+        Robot target = s.getHighestHealth(isAttackingToRed);
         double damage = super.getAttack();
         System.out.println(this.code + " attacks " + target.code);
         isDestroyed = target.getHitAndIsDesstroyed(damage);
