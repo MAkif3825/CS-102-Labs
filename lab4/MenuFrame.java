@@ -1,7 +1,5 @@
 package lab4;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +13,10 @@ import javax.swing.JTextField;
 
 public class MenuFrame extends JFrame {
     private final int WIDTH = 300;
-    private final int HEIGHT = 400;
+    private final int HEIGHT = 250;
+
+    private final int GAME_WIDTH = 800;
+    private final int GAME_HEIGHT = 800;
 
     private JFrame game;
 
@@ -34,10 +35,6 @@ public class MenuFrame extends JFrame {
         this.add(namePanel);
         this.add(speedPanel);
         this.add(startButton);
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Ship Game");
-        this.setVisible(true);
 
         this.setSize(WIDTH, HEIGHT);
     }
@@ -80,8 +77,7 @@ public class MenuFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event) {
-            if ( checkValues() )
-            {
+            if (checkValues()) {
                 startTheGame();
             }
         }
@@ -97,11 +93,14 @@ public class MenuFrame extends JFrame {
         return button;
     }
 
-    public void startTheGame(){
+    public void startTheGame() {
         int speed = Integer.parseInt(this.speedInput.getText());
         this.game = new GameFrame(this.nameInput.getText(), speed);
 
         this.setVisible(false);
+        game.setSize(GAME_WIDTH, GAME_HEIGHT);
+        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.setVisible(true);
     }
 
     public boolean checkValues() {
@@ -113,37 +112,29 @@ public class MenuFrame extends JFrame {
         String errorMessage = "";
         int errorCount = 0;
 
-        if ( speed.length() == 0 )
-        {
+        if (speed.length() == 0) {
             isSpeedOk = false;
             errorMessage = "Speed cannot be empty!";
             errorCount++;
-        }
-        else
-        {
-            for(int i = 0; i < speed.length() && isSpeedOk; i++)
-            {
-                if ( !Character.isDigit(speed.charAt(i)) )
-                {
+        } else {
+            for (int i = 0; i < speed.length() && isSpeedOk; i++) {
+                if (!Character.isDigit(speed.charAt(i))) {
                     isSpeedOk = false;
                     errorMessage = "Speed should be only numbers!";
                     errorCount++;
                 }
             }
         }
-        
-        if ( name.length() == 0 )
-        {
+
+        if (name.length() == 0) {
             isNameOk = false;
-            if ( errorCount > 0)
-            {
+            if (errorCount > 0) {
                 errorMessage = errorMessage + "\n";
             }
             errorMessage = errorMessage + "Name cannot be empty!";
         }
 
-        if ( !(isNameOk && isSpeedOk) )
-        {
+        if (!(isNameOk && isSpeedOk)) {
             System.out.println("Here");
             result = false;
             JOptionPane.showMessageDialog(this, errorMessage);

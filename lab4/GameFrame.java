@@ -1,13 +1,11 @@
 package lab4;
 
-import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameFrame extends JFrame{
-    private final int WIDTH = 800;
-    private final int HEIGHT = 800;
+
 
     private JPanel gamePanel;
     
@@ -22,9 +20,7 @@ public class GameFrame extends JFrame{
         this.gamePanel = new GamePanel(this);
         this.add(gamePanel);
 
-        this.setSize(WIDTH, HEIGHT);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+
     }
 
     public int getSpeed(){
